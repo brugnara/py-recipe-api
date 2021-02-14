@@ -1,2 +1,4 @@
 Django>=3.1
 djangorestframework
+
+flake8
