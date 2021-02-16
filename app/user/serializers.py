@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model, authenticate
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
+
 class UserSerializer(serializers.ModelSerializer):
     """.."""
 
@@ -19,6 +20,18 @@ class UserSerializer(serializers.ModelSerializer):
         """create stuff"""
         return get_user_model().objects.create_user(
             **validated_data)
+
+    def update(self, instance, validated_data):
+        """update an user"""
+        password = validated_data.pop('password', None)
+        user = super().update(instance, validated_data)
+
+        if password:
+            user.set_password(password)
+            user.save()
+
+        return user
+
 
 class AuthTokenSerializer(serializers.Serializer):
     """serializer for the user auth obj"""

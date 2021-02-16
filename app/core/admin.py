@@ -12,16 +12,19 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (
             None, {
-            'fields': (
-                'email',
-                'password',
-            )
-        }),
-        (_('Personal info'), {
-            'fields': (
-                'name',
-            )
-        }),
+                'fields': (
+                    'email',
+                    'password',
+                )
+            }
+        ),
+        (
+            _('Personal info'), {
+                'fields': (
+                    'name',
+                )
+            }
+        ),
         (
             _('Permissions'), {
                 'fields': (
@@ -50,3 +53,4 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Tag)
