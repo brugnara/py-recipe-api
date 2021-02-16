@@ -1,7 +1,22 @@
 version: "3"
 
 services:
+  db:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
   app:
+    environment:
+      - DB_HOST=db
+      - DB_NAME=app
+      - DB_USER=postgres
+      - DB_PASS=password
+
+    depends_on:
+      - db
+
     build:
       context: .
     ports:
